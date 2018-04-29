@@ -1,0 +1,9 @@
+.env
+.DS_Store
+.vscode/*
+.npm
+node_modules/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
