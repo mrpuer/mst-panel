@@ -5,28 +5,28 @@ import { CssBaseline, Grid } from 'material-ui';
 import UsersList from "./UsersList";
 import AddUser from "./AddUser";
 import Login from "./Login";
-
-const styles = {
-
-}
+import Header from "./layouts/Header";
+import Menu from "./layouts/Menu";
 
 const App = observer(({store}) => {
-  const { usersList, admin, isLogged } = store;
+  const { usersList, isLogged } = store;
   return (
     <React.Fragment>
       <CssBaseline />
     
-      {isLogged ? <Grid container className="main-container" spacing={16} justify="space-around">
-
-        <Grid item xs={6}>
-        <UsersList usersList={usersList}/>
+      {isLogged ? 
+      <div className="admin-area">
+        <Header />
+        <Menu />
+        <Grid container className="main-container" spacing={16} justify="space-around">
+          <Grid item xs={6}>
+            <UsersList store={store}/>
+          </Grid>
+          <Grid item xs={5}>
+            <AddUser usersList ={usersList} />
+          </Grid>
         </Grid>
-
-        <Grid item xs={5}>
-        <AddUser usersList ={usersList} />
-        </Grid>
-
-      </Grid> : <Login data={isLogged} />}
+      </div> : <Login data={store} />}
     
     </React.Fragment>
   )

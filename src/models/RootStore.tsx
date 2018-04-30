@@ -1,11 +1,25 @@
 import { types } from "mobx-state-tree";
 import UsersList from "./UsersList";
-import Admin from "./Admin";
 
 const RootStore = types.model("RootStore", {
-  admin: types.optional(Admin, {login: process.env.ADMIN_LOGIN, password: process.env.ADMIN_PASSWORD}),
   usersList: types.optional(UsersList, { users: [] }),
-  isLogged: false
-})
+  isLogged: true,
+  isError: false
+}).actions(self => ({
+  loginSuccess() {
+    fetch("https://randomuser.me/api/?results=10&inc=gender,name,email,dob,phone,picture,nat")
+    .then(response => response.json())
+    .then(data => {
+      self.usersList.fetch(data.results);
+    }).catch(error => console.log(error));
+    self.isLogged = true;
+  },
+  showError() {
+    self.isError = true;
+  },
+  hideError() {
+    self.isError = false;
+  }
+}))
 
 export default RootStore;

@@ -1,24 +1,13 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
-import Paper from 'material-ui/Paper';
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import Switch from 'material-ui/Switch';
-import Button from 'material-ui/Button';
+import { ListItem, ListItemSecondaryAction, ListItemText, Paper, List, Avatar, Switch, Button } from 'material-ui';
 
-const UsersList = observer(({usersList}) => {
-  const fetchUsers = () => {
-    fetch("https://randomuser.me/api/?results=10&inc=gender,name,email,dob,phone,picture,nat")
-    .then(response => response.json())
-    .then(data => {
-      usersList.fetch(data.results);
-    }).catch(error => console.log(error));
-  }
+const UsersList = observer(({store}) => {
   return (
     <Paper>
         <h1>Users List</h1>
         <List>
-        {usersList.users.map((user: any, key: string) => {
+        {store.usersList.users.map((user: any, key: string) => {
           const {name, nat, picture} = user;
           return (
             <ListItem key={key} dense button className="user-list">
@@ -40,10 +29,10 @@ const UsersList = observer(({usersList}) => {
           color="primary" 
           size="large" 
           className="fetch-users-button"
-          onClick={fetchUsers}
+          onClick={store.loginSuccess}
         >Want more users?</Button>
     </Paper>
   )}
 )
 
-export default inject("usersList")(UsersList);
+export default inject("store")(UsersList);
