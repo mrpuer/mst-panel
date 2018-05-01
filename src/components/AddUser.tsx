@@ -1,12 +1,6 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
-import Paper from 'material-ui/Paper';
-import { FormControl } from 'material-ui/Form';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Input, { InputLabel } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import { FormControl, Paper, TextField, Button, Input, InputLabel, Select, MenuItem } from 'material-ui';
 
 const AddUser = observer(({usersList}) => 
   <Paper>

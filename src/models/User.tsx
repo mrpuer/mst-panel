@@ -10,7 +10,8 @@ const User = types.model("User", {
   phone: types.string,
   picture: types.optional(Pic, {}),
   nat: types.string,
-  is_active: false
+  is_active: false,
+  show: false
 }).views(self => ({
   status() {
     return self.is_active ? "active" : "inactive";
@@ -18,6 +19,12 @@ const User = types.model("User", {
 })).actions(self => ({
   markActive() {
     self.is_active = !self.is_active;
+  },
+  markShow() {
+    self.show = !self.show;
+  },
+  edit(newData: any) {
+    self = newData;
   }
 }))
 

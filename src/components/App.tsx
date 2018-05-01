@@ -16,15 +16,17 @@ const App = observer(({store}) => {
     
       {isLogged ? 
       <div className="admin-area">
-        <Header />
-        <Menu />
-        <Grid container className="main-container" spacing={16} justify="space-around">
-          <Grid item xs={6}>
-            <UsersList store={store}/>
+      <Header />
+        <Grid container className="main-container" spacing={40} justify="flex-start">
+          <Grid item md={2} >
+            <Menu />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item md={9}>
+            <UsersList store={store} />
+          </Grid>
+          {/* <Grid item xs={5}>
             <AddUser usersList ={usersList} />
-          </Grid>
+          </Grid> */}
         </Grid>
       </div> : <Login data={store} />}
     
